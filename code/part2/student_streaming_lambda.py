@@ -138,30 +138,31 @@ def lambda_handler(event, context):
         batch.append(temp_dict5)
 
     # Update ticker values in DynamoDB table
-Item_1 :[
-    {key: "TickerName", value: "Index_1"},
-    {key: "Price", value: 100}
-],
-
-Item_2 :[
-    {key: "TickerName", value: "Index_2"},
-    {key: "Price", value: 90}
-],
-
-Item_3 :[
-    {key: "TickerName", value: "Index_3"},
-    {key: "Price", value: 80}
-],
-
-Item_4 :[
-    {key: "TickerName", value: "Index_4"},
-    {key: "Price", value: 70}
-],
-
-Item_5 :[
-    {key: "TickerName", value: "Index_5"},
-    {key: "Price", value: 60}
-]    
+   response = table.put_item(
+        Item={
+            'TickerName' : Tickers[0],
+            'Price' : Decimal(str(100), None)}
+            )
+    response = table.put_item(
+        Item={
+            'TickerName' : Tickers[1],
+            'Price' : Decimal(str(90), None)}
+            )
+    response = table.put_item(
+        Item={
+            'TickerName' : Tickers[2],
+            'Price' : Decimal(str(80), None)}
+            )
+    response = table.put_item(
+        Item={
+            'TickerName' : Tickers[3],
+            'Price' : Decimal(str(70), None)}
+            )
+    response = table.put_item(
+        Item={
+            'TickerName' : Tickers[4],
+            'Price' : Decimal(str(60), None)}
+            )  
 
     # Put records into the Firehose stream
     firehose_client = boto3.client('firehose')
